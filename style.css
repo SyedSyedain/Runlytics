@@ -54,16 +54,16 @@
 html {
   font-size: 16px;
   -webkit-text-size-adjust: 100%;
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  overflow-x: hidden;
 }
 
 body {
   font-family: var(--font-body);
   background: var(--color-bg);
   color: var(--color-text);
-  height: 100%;
-  overflow: hidden;
+  min-height: 100%;
+  overflow-x: hidden;
   line-height: 1.5;
 }
 
@@ -72,10 +72,10 @@ body {
   max-width: 1180px;
   margin: 0 auto;
   padding: 2rem 2.5rem 1.5rem;
-  height: 100vh;
+  min-height: 100vh;
+  min-height: 100svh;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
 }
 
 /* ── Two-column grid ────────────────────────────────────────── */
@@ -86,7 +86,6 @@ body {
   align-items: start;
   flex: 1;
   min-height: 0;
-  overflow: hidden;
 }
 
 .col-left,
@@ -94,8 +93,32 @@ body {
   display: flex;
   flex-direction: column;
   gap: 1.25rem;
-  overflow-y: auto;
   min-height: 0;
+}
+
+@media (min-width: 721px) and (min-height: 760px) {
+  html,
+  body {
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .app {
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+  }
+
+  .two-col {
+    overflow: hidden;
+  }
+
+  .col-left,
+  .col-right {
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    padding-bottom: 2px;
+  }
 }
 
 /* ── Top Bar ────────────────────────────────────────────────── */
@@ -567,7 +590,7 @@ body {
 }
 
 /* ── Responsive ─────────────────────────────────────────────── */
-@media (max-width: 720px) {
+@media (max-width: 720px), (max-height: 759px) {
   html,
   body {
     height: auto;
@@ -579,6 +602,7 @@ body {
     padding: 1.25rem 1rem 1.5rem;
     height: auto;
     min-height: 100vh;
+    min-height: 100svh;
     overflow: visible;
     display: block;
   }
