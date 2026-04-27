@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Runlytics — Know exactly when your startup hits zero." />
+    <title>Runlytics</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div class="app">
+
+      <!-- Top Bar -->
+      <header class="top-bar">
+        <div class="logo">Runlytics</div>
+        <div class="live-badge">
+          <div class="live-dot" id="liveDot"></div>
+          <span>Live</span>
+        </div>
+      </header>
+
+      <!-- Hero (full-width, above the two columns) -->
+      <section class="hero">
+        <p class="hero-eyebrow">Founder's tool</p>
+        <h1 class="hero-title">
+          How long until <em>the money runs out?</em>
+        </h1>
+        <p class="hero-sub">Enter your numbers. Get the uncomfortable truth.</p>
+      </section>
+
+      <!-- Two-column body -->
+      <div class="two-col">
+
+        <!-- LEFT: inputs -->
+        <div class="col-left">
+          <section class="inputs-panel" aria-label="Financial inputs">
+            <div class="input-row">
+              <div class="input-cell">
+                <label class="input-cell-label" for="cash">Cash on hand</label>
+                <div class="input-cell-wrap">
+                  <span class="input-prefix" aria-hidden="true">$</span>
+                  <input
+                    class="num-input"
+                    id="cash"
+                    type="number"
+                    min="0"
+                    placeholder="500000"
+                    autocomplete="off"
+                  />
+                </div>
+                <p class="input-cell-hint">Total liquid funds</p>
+              </div>
+              <div class="divider-v" aria-hidden="true"></div>
+              <div class="input-cell">
+                <label class="input-cell-label" for="burn">Monthly burn</label>
+                <div class="input-cell-wrap">
+                  <span class="input-prefix" aria-hidden="true">$</span>
+                  <input
+                    class="num-input"
+                    id="burn"
+                    type="number"
+                    min="0"
+                    placeholder="40000"
+                    autocomplete="off"
+                  />
+                </div>
+                <p class="input-cell-hint">Gross monthly outflow</p>
+              </div>
+            </div>
+
+            <div class="input-row">
+              <div class="input-cell">
+                <label class="input-cell-label" for="rev">Monthly revenue</label>
+                <div class="input-cell-wrap">
+                  <span class="input-prefix" aria-hidden="true">$</span>
+                  <input
+                    class="num-input"
+                    id="rev"
+                    type="number"
+                    min="0"
+                    placeholder="0"
+                    autocomplete="off"
+                  />
+                </div>
+                <p class="input-cell-hint">Reduces net burn</p>
+              </div>
+              <div class="divider-v" aria-hidden="true"></div>
+              <div class="input-cell">
+                <label class="input-cell-label" for="growth">Revenue growth</label>
+                <div class="input-cell-wrap">
+                  <span class="input-prefix" aria-hidden="true">%</span>
+                  <input
+                    class="num-input"
+                    id="growth"
+                    type="number"
+                    min="0"
+                    max="100"
+                    placeholder="0"
+                    autocomplete="off"
+                  />
+                </div>
+                <p class="input-cell-hint">Monthly growth rate</p>
+              </div>
+            </div>
+          </section>
+        </div><!-- /.col-left -->
+
+        <!-- RIGHT: results -->
+        <div class="col-right">
+          <section
+            class="result-panel"
+            id="resultPanel"
+            aria-live="polite"
+            aria-label="Runway result"
+          >
+            <div class="result-top">
+              <div class="result-bg-effect" aria-hidden="true"></div>
+
+              <div class="result-status-line">
+                <div class="status-pip" id="statusPip" aria-hidden="true"></div>
+                <span class="status-word" id="statusWord">Waiting</span>
+              </div>
+
+              <div class="big-number" id="bigNumber">
+                <span class="big-number-placeholder">—</span>
+              </div>
+
+              <p class="empty-state" id="emptyState">Enter numbers on the left.</p>
+              <p class="result-desc" id="resultDesc" hidden></p>
+
+              <div class="alert-banner alert-banner--danger" id="dangerBanner" hidden>
+                <p class="alert-banner__text" id="dangerMsg"></p>
+              </div>
+
+              <div class="alert-banner alert-banner--safe" id="safeBanner" hidden>
+                <p class="alert-banner__text" id="safeMsg"></p>
+              </div>
+            </div>
+
+            <div class="result-grid" id="resultGrid" hidden>
+              <div class="stat-cell">
+                <p class="stat-label">Zero date</p>
+                <p class="stat-val" id="statDate">—</p>
+              </div>
+              <div class="stat-cell">
+                <p class="stat-label">Days left</p>
+                <p class="stat-val" id="statDays">—</p>
+              </div>
+              <div class="stat-cell">
+                <p class="stat-label">Net burn / mo</p>
+                <p class="stat-val" id="statBurn">—</p>
+              </div>
+            </div>
+          </section>
+
+          <div class="runway-track-wrap" aria-hidden="true">
+            <div class="track-bg">
+              <div class="track-fill" id="trackFill"></div>
+            </div>
+            <div class="track-markers">
+              <span class="track-marker">0</span>
+              <span class="track-marker">6 mo</span>
+              <span class="track-marker">12 mo</span>
+              <span class="track-marker">18 mo</span>
+              <span class="track-marker">24+</span>
+            </div>
+          </div>
+
+          <aside class="insight-panel" id="insightPanel" hidden>
+            <p class="insight-label">Perspective</p>
+            <p class="insight-text" id="insightText"></p>
+          </aside>
+        </div><!-- /.col-right -->
+
+      </div><!-- /.two-col -->
+
+    </div><!-- /.app -->
+
+    <script src="app.js"></script>
+  </body>
+</html>
