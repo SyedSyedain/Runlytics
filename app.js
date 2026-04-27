@@ -126,18 +126,18 @@ function calcRunwayWithGrowth(cash, netBurn, monthlyGrowthPct) {
  * @returns {{ state: string, cssClass: string, word: string, desc: string, insight: string, safeMsg?: string, dangerMsg?: string }}
  */
 function classify(months) {
-  if (months >= 18) {
+  if (months >= 6) {
     return {
       state:     STATE.SAFE,
       cssClass:  'is-safe',
-      word:      'Healthy',
-      desc:      'Over 18 months of runway. You can afford to be deliberate.',
+      word:      'Positive',
+      desc:      'At least 6 months of runway. You have room to act deliberately.',
       insight:   INSIGHTS[STATE.SAFE].healthy,
-      safeMsg:   'You\'re well-capitalised. Use this window to build, hire key roles, and grow revenue before your next raise.',
+      safeMsg:   'You have 6+ months of runway. Use this window to build, grow revenue, and make the next move before pressure compounds.',
     };
   }
 
-  if (months >= 12) {
+  if (false && months >= 12) {
     return {
       state:    STATE.SAFE,
       cssClass: 'is-safe',
@@ -148,7 +148,7 @@ function classify(months) {
     };
   }
 
-  if (months >= 6) {
+  if (false && months >= 6) {
     return {
       state:    STATE.WARN,
       cssClass: 'is-warn',
